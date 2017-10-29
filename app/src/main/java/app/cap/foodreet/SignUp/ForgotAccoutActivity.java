@@ -29,7 +29,7 @@ public class ForgotAccoutActivity extends AppCompatActivity {
         setContentView(R.layout.activity_forgot_accout);
         inputEmail = (EditText) findViewById(R.id.email);
         btnReset = (Button)findViewById(R.id.btn_reset_password);
-        progressBar = (ProgressBar) findViewById(R.id.progressBar);
+        progressBar = (ProgressBar) findViewById(R.id.progressbar);
         mFirebaseAuth = FirebaseAuth.getInstance();
 
         btnReset.setOnClickListener(new View.OnClickListener() {

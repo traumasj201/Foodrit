@@ -17,6 +17,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import app.cap.foodreet.Foodreet;
 import app.cap.foodreet.MainActivity;
 import app.cap.foodreet.R;
 
@@ -29,11 +30,11 @@ public class SignUpActivity extends AppCompatActivity {
     private DatabaseReference mDatabaseRef;
     private static final String mOwner = "owner";
     private static final String mUser = "user";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
-
         progressBar = (ProgressBar)findViewById(R.id.progressbar);
         mFirebaseAuth = FirebaseAuth.getInstance();
         mDatabaseRef = FirebaseDatabase.getInstance().getReference().child("users");
@@ -50,11 +51,10 @@ public class SignUpActivity extends AppCompatActivity {
         });
     }
     private void doSignUp() {
-        final String first = getIntent().getStringExtra("first");
+
         final String email = etSignUpEmail.getText().toString().trim();
         String pass = etSignUpPassword.getText().toString().trim();
         String passConfirm = etPasswordConfirm.getText().toString().trim();
-
         if (!email.isEmpty() && !pass.isEmpty() && !passConfirm.isEmpty()) {
             progressBar.setVisibility(View.VISIBLE);
             if (pass.compareTo(passConfirm)!=0){
@@ -64,17 +64,18 @@ public class SignUpActivity extends AppCompatActivity {
                 mFirebaseAuth.createUserWithEmailAndPassword(email, pass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
+                        Foodreet foodreet = (Foodreet)getApplicationContext();
                         String user_id = mFirebaseAuth.getCurrentUser().getUid();
                         DatabaseReference userDbRef = mDatabaseRef.child(user_id);
                         if (userDbRef.child("email").equals(email)) {
                             Toast.makeText(getApplicationContext(), getString(R.string.registerd), Toast.LENGTH_LONG).show();
                             progressBar.setVisibility(View.GONE);
                         } else {
-                            if(first.equals(mUser)&&first!=null) {
+                            if(foodreet.getRoleType().equals(mUser)&&foodreet!=null) {
                                 userDbRef.child("email").setValue(email);
                                 userDbRef.child("u_id").setValue(user_id);
                                 userDbRef.child("role").setValue(mUser);
-                            }else if(first.equals(mOwner)&&first!=null){
+                            }else if(foodreet.getRoleType().equals(mOwner)&&foodreet!=null){
                                 userDbRef.child("email").setValue(email);
                                 userDbRef.child("u_id").setValue(user_id);
                                 userDbRef.child("role").setValue(mOwner);

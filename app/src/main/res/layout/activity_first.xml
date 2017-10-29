@@ -36,7 +36,7 @@
         android:textColor="@color/white"
         android:textSize="20sp"
         android:textStyle="bold"
-        android:background="@color/colorPrimaryDark"
+        android:background="@drawable/login_btn_style"
         android:layout_centerHorizontal="true"/>
     <Button
         android:layout_marginTop="30dp"
@@ -48,7 +48,7 @@
         android:textColor="@color/colorWhite"
         android:textSize="20sp"
         android:textStyle="bold"
-        android:background="@color/colorPrimary"
+        android:background="@drawable/login_btn_style"
         android:layout_centerHorizontal="true"/>
 
 </RelativeLayout>

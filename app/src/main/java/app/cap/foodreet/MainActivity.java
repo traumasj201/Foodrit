@@ -9,6 +9,8 @@ import app.cap.foodreet.Fragment.MapFragment;
 import app.cap.foodreet.Fragment.ProfileFragment;
 import app.cap.foodreet.Fragment.StoreFragment;
 
+//일반 사용자용 MAIN
+
 public class MainActivity extends AppCompatActivity {
 
     private ViewPagerAdapter mViewPagerAdapter;

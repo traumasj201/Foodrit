@@ -19,7 +19,7 @@ public class FirstActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_first);
-
+        final Foodreet foodreet = (Foodreet)getApplicationContext();
         btnOwner = (Button)findViewById(R.id.button_owner);
         btnUser = (Button)findViewById(R.id.button_user);
 
@@ -27,7 +27,8 @@ public class FirstActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Toast.makeText(getApplicationContext(), getString(R.string.join_owner),Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(FirstActivity.this, SignInActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK).putExtra("first",mOwner));
+                foodreet.setRoleType(mOwner);
+                startActivity(new Intent(FirstActivity.this, SignInActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
             }
         });
 
@@ -35,7 +36,8 @@ public class FirstActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Toast.makeText(getApplicationContext(), getString(R.string.join_user), Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(FirstActivity.this, SignInActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK).putExtra("first",mUser));
+                foodreet.setRoleType(mUser);
+                startActivity(new Intent(FirstActivity.this, SignInActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
             }
         });
     }

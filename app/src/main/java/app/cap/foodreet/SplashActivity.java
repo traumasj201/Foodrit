@@ -26,9 +26,11 @@ public class SplashActivity extends AppCompatActivity {
                     editor.putBoolean("isFirst", false).apply();
                     //처음 접속인 경우 선택
                     startActivity(new Intent(SplashActivity.this, FirstActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+                    finish();
                 } else {
                     //처음 접속이 아닌 경우 선택
                     startActivity(new Intent(SplashActivity.this, SignInActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+                    finish();
                 }
             }
         }, time_over);
