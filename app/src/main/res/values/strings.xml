@@ -1,3 +1,29 @@
 <resources>
-    <string name="app_name">Foodreet</string>
+    <string name="app_name">푸드릿</string>
+    <string name="com.kakao.sdk.AppKey">79b2d08b28694b7d4eabbc5242c912a1</string>
+    <string name="welcome">환영합니다.</string>
+    <string name="join_owner">영업자로 시작하기</string>
+    <string name="join_user">사용자로 시작하기</string>
+    <string name="email">이메일 입력</string>
+    <string name="email_correct">이메일을 정확하게 입력해주세요. 비밀번호 분실시 사용됩니다.</string>
+    <string name="password_confirm">비밀번호를 한번 더 입력해주세요.</string>
+    <string name="incorrect_confirm">비밀번호가 일치하지 않습니다.</string>
+    <string name="sent_password">이메일로 임시 비밀번호로를 전송했습니다.</string>
+    <string name="error_sent_password">임시 비밀번호를 전송하는데 실패했습니다. 다시 시도하세요.</string>
+    <string name="reset_password">비밀번호 초기화</string>
+    <string name="registerd">이미 등록된 이메일입니다.</string>
+    <string name="password">비밀번호 입력</string>
+    <string name="SignIn">로그인</string>
+    <string name="SignOut">로그아웃</string>
+    <string name="newAccount">계정 새로 만들기</string>
+    <string name="forgotAccount">계정 찾기</string>
+    <string name="kakao_login">카카오 아이디로 로그인</string>
+    <string name="incorrect_id">정확한 이메일과 비밀번호를 입력해주십시오.</string>
+    <string name="incorrect_et">입력한 정보가 올바르지 않습니다.</string>
+    <string name="newAccout">새로운 계정 만들기</string>
+    <string name="register">등록하기</string>
+    <string name="default_error">예상치 못한 오류가 발생했습니다.</string>
+    <string name="profile">프로필</string>
+    <string name="map">지도</string>
+    <string name="store">즐겨찾기</string>
 </resources>
