@@ -1,5 +1,7 @@
 package app.cap.foodreet;
 
+import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
@@ -22,9 +24,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         mViewPager = (ViewPager) findViewById(R.id.vpPager);
         mViewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
-        mViewPagerAdapter.addFragment(new ProfileFragment(),getString(R.string.profile));
-        mViewPagerAdapter.addFragment(new MapFragment(), getString(R.string.map));
-        mViewPagerAdapter.addFragment(new StoreFragment(), getString(R.string.store));
+        mViewPagerAdapter.addFragment(new ProfileFragment(),getString(R.string.profile), ContextCompat.getDrawable(getApplicationContext(),R.drawable.ic_person_outline_black_18dp));
+        mViewPagerAdapter.addFragment(new MapFragment(), getString(R.string.map),ContextCompat.getDrawable(getApplication(), R.drawable.ic_place_black_18dp));
+        mViewPagerAdapter.addFragment(new StoreFragment(), getString(R.string.store),ContextCompat.getDrawable(getApplicationContext(),R.drawable.ic_menu_black_18dp));
         mViewPager.setAdapter(mViewPagerAdapter);
     }
 }

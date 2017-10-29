@@ -199,14 +199,18 @@ public class SignInActivity extends AppCompatActivity {
                 }else if (userDbRef.child("email").equals(email)&&userDbRef.child("role").equals(mUser)){
                     startActivity(new Intent(SignInActivity.this, MainActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
                     finish();
-                }else if(foodreet.getRoleType().equals(mOwner)&&foodreet!=null){
+                }else if(foodreet.getRoleType().equals(mOwner)&&foodreet.getRoleType()!=null){
                     userDbRef.child("email").setValue(email);
                     userDbRef.child("u_id").setValue(user_id);
                     userDbRef.child("role").setValue(mOwner);
-                }else if(foodreet.getRoleType().equals(mUser)&&foodreet!=null){
+                    startActivity(new Intent(SignInActivity.this, Main2Activity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+                    finish();
+                }else if(foodreet.getRoleType().equals(mUser)&&foodreet.getRoleType()!=null){
                     userDbRef.child("email").setValue(email);
                     userDbRef.child("u_id").setValue(user_id);
                     userDbRef.child("role").setValue(mUser);
+                    startActivity(new Intent(SignInActivity.this, MainActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+                    finish();
                 }
             }
             @Override

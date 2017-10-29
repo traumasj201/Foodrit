@@ -28,7 +28,7 @@ public class FirstActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Toast.makeText(getApplicationContext(), getString(R.string.join_owner),Toast.LENGTH_SHORT).show();
                 foodreet.setRoleType(mOwner);
-                startActivity(new Intent(FirstActivity.this, SignInActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+                startActivity(new Intent(FirstActivity.this, SignInActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TOP));
             }
         });
 
@@ -37,7 +37,7 @@ public class FirstActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Toast.makeText(getApplicationContext(), getString(R.string.join_user), Toast.LENGTH_SHORT).show();
                 foodreet.setRoleType(mUser);
-                startActivity(new Intent(FirstActivity.this, SignInActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+                startActivity(new Intent(FirstActivity.this, SignInActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TOP));
             }
         });
     }

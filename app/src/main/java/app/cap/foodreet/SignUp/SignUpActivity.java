@@ -20,6 +20,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import app.cap.foodreet.Foodreet;
 import app.cap.foodreet.MainActivity;
 import app.cap.foodreet.R;
+import app.cap.foodreet.SignIn.SignInActivity;
 
 public class SignUpActivity extends AppCompatActivity {
 
@@ -36,9 +37,9 @@ public class SignUpActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
         progressBar = (ProgressBar)findViewById(R.id.progressbar);
+        progressBar.setVisibility(View.INVISIBLE);
         mFirebaseAuth = FirebaseAuth.getInstance();
         mDatabaseRef = FirebaseDatabase.getInstance().getReference().child("users");
-
         etSignUpEmail = (EditText) findViewById(R.id.xetSignUpEmail);
         etSignUpPassword = (EditText) findViewById(R.id.xetSignUpPassword);
         etPasswordConfirm = (EditText)findViewById(R.id.xetPasswordConfirm);
@@ -51,10 +52,13 @@ public class SignUpActivity extends AppCompatActivity {
         });
     }
     private void doSignUp() {
-
         final String email = etSignUpEmail.getText().toString().trim();
         String pass = etSignUpPassword.getText().toString().trim();
         String passConfirm = etPasswordConfirm.getText().toString().trim();
+
+        if (email.isEmpty()||pass.isEmpty()||passConfirm.isEmpty()){
+            Toast.makeText(getApplicationContext(),getString(R.string.incorrect_id),Toast.LENGTH_SHORT).show();
+        }
         if (!email.isEmpty() && !pass.isEmpty() && !passConfirm.isEmpty()) {
             progressBar.setVisibility(View.VISIBLE);
             if (pass.compareTo(passConfirm)!=0){
@@ -71,11 +75,11 @@ public class SignUpActivity extends AppCompatActivity {
                             Toast.makeText(getApplicationContext(), getString(R.string.registerd), Toast.LENGTH_LONG).show();
                             progressBar.setVisibility(View.GONE);
                         } else {
-                            if(foodreet.getRoleType().equals(mUser)&&foodreet!=null) {
+                            if(foodreet.getRoleType().equals(mUser)&&foodreet.getRoleType()!=null) {
                                 userDbRef.child("email").setValue(email);
                                 userDbRef.child("u_id").setValue(user_id);
                                 userDbRef.child("role").setValue(mUser);
-                            }else if(foodreet.getRoleType().equals(mOwner)&&foodreet!=null){
+                            }else if(foodreet.getRoleType().equals(mOwner)&&foodreet.getRoleType()!=null){
                                 userDbRef.child("email").setValue(email);
                                 userDbRef.child("u_id").setValue(user_id);
                                 userDbRef.child("role").setValue(mOwner);
@@ -90,5 +94,9 @@ public class SignUpActivity extends AppCompatActivity {
                 });
             }
         }
+    }
+    public void onBackPressed(){
+        startActivity(new Intent(this, SignInActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+        finish();
     }
 }

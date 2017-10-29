@@ -17,10 +17,16 @@ import app.cap.foodreet.R;
 public class MapFragment extends Fragment{
 
     View view;
+
+    public MapFragment(){
+
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
     }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

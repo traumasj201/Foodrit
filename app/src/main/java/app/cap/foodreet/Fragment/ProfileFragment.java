@@ -17,10 +17,13 @@ public class ProfileFragment extends Fragment{
 
     View view;
 
+    public ProfileFragment(){
+    }
     @Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
     }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -28,4 +31,5 @@ public class ProfileFragment extends Fragment{
         view = inflater.inflate(R.layout.profile_fragment, container, false);
         return view;
     }
+
 }

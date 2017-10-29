@@ -17,6 +17,9 @@ public class StoreFragment extends Fragment {
 
     View view;
 
+    public StoreFragment(){
+
+    }
     @Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
