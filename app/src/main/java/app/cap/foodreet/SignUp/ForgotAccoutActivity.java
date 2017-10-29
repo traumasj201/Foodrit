@@ -30,6 +30,7 @@ public class ForgotAccoutActivity extends AppCompatActivity {
         inputEmail = (EditText) findViewById(R.id.email);
         btnReset = (Button)findViewById(R.id.btn_reset_password);
         progressBar = (ProgressBar) findViewById(R.id.progressbar);
+        progressBar.setVisibility(View.INVISIBLE);
         mFirebaseAuth = FirebaseAuth.getInstance();
 
         btnReset.setOnClickListener(new View.OnClickListener() {
