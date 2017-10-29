@@ -32,6 +32,8 @@ import com.kakao.util.exception.KakaoException;
 import com.kakao.auth.ApprovalType;
 import com.kakao.auth.AuthType;
 import com.kakao.auth.IApplicationConfig;
+
+import app.cap.foodreet.Main2Activity;
 import app.cap.foodreet.MainActivity;
 import app.cap.foodreet.R;
 import app.cap.foodreet.SignUp.ForgotAccoutActivity;
@@ -52,12 +54,14 @@ public class SignInActivity extends AppCompatActivity {
     private GoogleApiClient mGoogleApiClient;
     private static AuthType auth_type = AuthType.KAKAO_TALK;
     private SessionCallback mSessionCallback;
+    private static final String mOwner = "owner";
+    private static final String mUser = "user";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_in);
-        Intent intent = getIntent();
+
         mFirebaseAuth = FirebaseAuth.getInstance();
         mDatabaseRef = FirebaseDatabase.getInstance().getReference().child("users");
         mDatabaseRef.keepSynced(true);
@@ -91,8 +95,17 @@ public class SignInActivity extends AppCompatActivity {
         btnNewAccount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(SignInActivity.this, SignUpActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
-                finish();
+                final String first = getIntent().getStringExtra("first");
+                if (first!=null&&first.equals(mUser)) {
+                    startActivity(new Intent(SignInActivity.this, SignUpActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK).putExtra("first", mUser));
+                    finish();
+                }
+                else if(first!=null&&first.equals(mOwner)){
+                    startActivity(new Intent(SignInActivity.this, SignUpActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK).putExtra("first", mOwner));
+                    finish();
+                }else{
+                    Toast.makeText(getApplicationContext(), getString(R.string.default_error), Toast.LENGTH_SHORT).show();
+                }
             }
         });
         btnForgotAccount.setOnClickListener(new View.OnClickListener() {
@@ -139,7 +152,6 @@ public class SignInActivity extends AppCompatActivity {
         }
     }
 
-
     //--Email Login--
     private void doLogIn() {
 
@@ -172,8 +184,17 @@ public class SignInActivity extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if (dataSnapshot.hasChild(user_id)) {
                     progressBar.setVisibility(View.GONE);
-                    startActivity(new Intent(SignInActivity.this, MainActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
-                    finish();
+                    String role = dataSnapshot.child("role").getValue(String.class);
+                    if (role!=null&&role.equals(mUser)) {
+                        startActivity(new Intent(SignInActivity.this, MainActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+                        finish();
+                    }
+                    else if(role!=null&&role.equals(mOwner)){
+                        startActivity(new Intent(SignInActivity.this, Main2Activity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+                        finish();
+                    }else{
+                        Toast.makeText(getApplicationContext(),getString(R.string.default_error),Toast.LENGTH_SHORT).show();
+                    }
                 } else {
                     Toast.makeText(SignInActivity.this, getString(R.string.incorrect_et), Toast.LENGTH_SHORT).show();
                 }

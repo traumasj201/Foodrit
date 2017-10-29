@@ -10,6 +10,7 @@ import app.cap.foodreet.Fragment.ProfileFragment;
 import app.cap.foodreet.Fragment.StoreFragment;
 
 public class MainActivity extends AppCompatActivity {
+
     private ViewPagerAdapter mViewPagerAdapter;
     private ViewPager mViewPager;
 

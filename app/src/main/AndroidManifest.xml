@@ -36,13 +36,14 @@
             android:name=".SignUp.ForgotAccoutActivity"
             android:parentActivityName=".SignIn.SignInActivity">
         </activity>
-
+        <activity
+            android:name=".Main2Activity">
+        </activity>
         <meta-data
             android:name="com.kakao.sdk.AppKey"
             android:value="@string/com.kakao.sdk.AppKey"/>
 
-        <activity android:name=".Main2Activity">
-        </activity>
+
     </application>
 
 </manifest>

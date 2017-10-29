@@ -27,13 +27,12 @@ public class SignUpActivity extends AppCompatActivity {
     private ProgressBar progressBar;
     private FirebaseAuth mFirebaseAuth;
     private DatabaseReference mDatabaseRef;
-
+    private static final String mOwner = "owner";
+    private static final String mUser = "user";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
-
-        Intent intent = getIntent();
 
         progressBar = (ProgressBar)findViewById(R.id.progressbar);
         mFirebaseAuth = FirebaseAuth.getInstance();
@@ -51,6 +50,7 @@ public class SignUpActivity extends AppCompatActivity {
         });
     }
     private void doSignUp() {
+        final String first = getIntent().getStringExtra("first");
         final String email = etSignUpEmail.getText().toString().trim();
         String pass = etSignUpPassword.getText().toString().trim();
         String passConfirm = etPasswordConfirm.getText().toString().trim();
@@ -70,8 +70,15 @@ public class SignUpActivity extends AppCompatActivity {
                             Toast.makeText(getApplicationContext(), getString(R.string.registerd), Toast.LENGTH_LONG).show();
                             progressBar.setVisibility(View.GONE);
                         } else {
-                            userDbRef.child("email").setValue(email);
-                            userDbRef.child("u_id").setValue(user_id);
+                            if(first.equals(mUser)&&first!=null) {
+                                userDbRef.child("email").setValue(email);
+                                userDbRef.child("u_id").setValue(user_id);
+                                userDbRef.child("role").setValue(mUser);
+                            }else if(first.equals(mOwner)&&first!=null){
+                                userDbRef.child("email").setValue(email);
+                                userDbRef.child("u_id").setValue(user_id);
+                                userDbRef.child("role").setValue(mOwner);
+                            }
                             progressBar.setVisibility(View.GONE);
                             Intent intent = new Intent(SignUpActivity.this, MainActivity.class);
                             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
