@@ -193,6 +193,8 @@ public class SignInActivity extends AppCompatActivity {
                 String user_id = mFirebaseAuth.getCurrentUser().getUid();
                 DatabaseReference userDbRef = mDatabaseRef.child(user_id);
                 Foodreet foodreet = (Foodreet)getApplicationContext();
+                foodreet.getRoleType();
+                Log.d("사인인","통과1");
                 if (userDbRef.child("email").equals(email)&&userDbRef.child("role").equals(mOwner)) {
                     startActivity(new Intent(SignInActivity.this, Main2Activity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
                     finish();

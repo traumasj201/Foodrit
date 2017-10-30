@@ -2,9 +2,9 @@ package app.cap.foodreet;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 
 import app.cap.foodreet.SignIn.SignInActivity;
 
@@ -19,6 +19,7 @@ public class SplashActivity extends AppCompatActivity {
         mHandler.postDelayed(new Runnable() {
             @Override
             public void run() {
+
                 SharedPreferences mPref = getSharedPreferences("isFirst", MODE_PRIVATE);
                 Boolean bfirst = mPref.getBoolean("isFirst", true);
                 if (bfirst){
@@ -35,4 +36,5 @@ public class SplashActivity extends AppCompatActivity {
             }
         }, time_over);
     }
+
 }

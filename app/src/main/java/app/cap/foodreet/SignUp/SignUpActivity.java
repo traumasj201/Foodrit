@@ -1,9 +1,10 @@
 package app.cap.foodreet.SignUp;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -69,26 +70,39 @@ public class SignUpActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         Foodreet foodreet = (Foodreet)getApplicationContext();
-                        String user_id = mFirebaseAuth.getCurrentUser().getUid();
+                      //  String user_id = mFirebaseAuth.getCurrentUser().getUid();
+                        String user_id = String.valueOf(mFirebaseAuth.getCurrentUser());
                         DatabaseReference userDbRef = mDatabaseRef.child(user_id);
+                        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
+                        String pushId = databaseReference.child("users").push().getKey();
                         if (userDbRef.child("email").equals(email)) {
                             Toast.makeText(getApplicationContext(), getString(R.string.registerd), Toast.LENGTH_LONG).show();
                             progressBar.setVisibility(View.GONE);
                         } else {
+                            Log.d("사인업","통과1");
                             if(foodreet.getRoleType().equals(mUser)&&foodreet.getRoleType()!=null) {
+                                Log.d("사인업","통과2");
                                 userDbRef.child("email").setValue(email);
-                                userDbRef.child("u_id").setValue(user_id);
+                                userDbRef.child("u_id").setValue(pushId);
                                 userDbRef.child("role").setValue(mUser);
+
+                                progressBar.setVisibility(View.GONE);
+                                Intent intent = new Intent(SignUpActivity.this, MainActivity.class);
+                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                                startActivity(intent);
+                                finish();
                             }else if(foodreet.getRoleType().equals(mOwner)&&foodreet.getRoleType()!=null){
                                 userDbRef.child("email").setValue(email);
-                                userDbRef.child("u_id").setValue(user_id);
+                                userDbRef.child("u_id").setValue(pushId);
                                 userDbRef.child("role").setValue(mOwner);
+
+                                progressBar.setVisibility(View.GONE);
+                                Intent intent = new Intent(SignUpActivity.this, MainActivity.class);
+                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                                startActivity(intent);
+                                finish();
                             }
-                            progressBar.setVisibility(View.GONE);
-                            Intent intent = new Intent(SignUpActivity.this, MainActivity.class);
-                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-                            startActivity(intent);
-                            finish();
+
                         }
                     }
                 });
